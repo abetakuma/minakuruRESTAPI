@@ -1,4 +1,4 @@
-package com.example.idea.entity;
+package com.example.user.entity;
 
 import java.util.Date;
 
@@ -13,25 +13,21 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "ideas")
+@Table(name = "users")
 @Data
-public class Idea {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ideaId;
-    private String ideaName;
-    private String picture;
-    private Long address1;
-    private String address2;
-    private String building;
-    private Date ideaStartOn;
-    private Date ideaEndOn;
-    private Long category;
-    private String qualification;
-    private Date deadline;
-    private String goal;
-    private String tag;
     private Long userId;
+    private String name;
+    private Long age;
+    private Long sex;
+    private String hobby;
+    private String interest;
+    private Long prefecture;
+    private String city;
+    private String supply;
+    private Long acceptInvitation;
     private Date createdAt;
     private Date updatedAt;
 

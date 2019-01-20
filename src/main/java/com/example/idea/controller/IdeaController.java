@@ -5,18 +5,20 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.idea.Entity.Idea;
+import com.example.idea.entity.Idea;
 import com.example.idea.service.IdeaService;
 
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("api/ideas")
 public class IdeaController {
@@ -35,11 +37,23 @@ public class IdeaController {
         return ideas;
     }
 
+
+    @GetMapping("recommended")
+    public List<Idea> getRecommendedIdeas() {
+        List<Idea> ideas = ideaService.getRecommendedIdeas();
+        return ideas;
+    }
+
     @GetMapping("{id}")
     public Optional<Idea> show(@PathVariable Long id) {
         Optional<Idea> idea = ideaService.findOne(id);
 
         return idea;
+    }
+
+    @PostMapping
+    public void save(@RequestBody Idea idea) {
+        ideaService.save(idea);
     }
 
     @GetMapping("new")
@@ -53,23 +67,15 @@ public class IdeaController {
         return "ideas/edit";
     }
 
+    @PutMapping("{ideaId}")
+    public void update(@PathVariable Long ideaId, @RequestBody Idea idea) {
+		idea.setIdeaId(ideaId);
 
-    @PostMapping
-    public String create(@ModelAttribute Idea idea) { // ⑥
         ideaService.save(idea);
-        return "redirect:/ideas"; // ⑦
-    }
-
-    @PutMapping("{id}")
-    public String update(@PathVariable Long id, @ModelAttribute Idea idea) {
-//        idea.setId(id);
-//        ideaService.save(idea);
-        return "redirect:/ideas";
     }
 
     @DeleteMapping("{id}")
-    public String destroy(@PathVariable Long id) {
+    public void destroy(@PathVariable Long id) {
         ideaService.delete(id);
-        return "redirect:/ideas";
     }
 }
