@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import com.example.security.entity.UserLoginInfo;
 
 @Repository
-public interface UserLoginInfoRepository extends JpaRepository<UserLoginInfo, String>{
+public interface UserLoginInfoRepository extends JpaRepository<UserLoginInfo, Long>{
 }

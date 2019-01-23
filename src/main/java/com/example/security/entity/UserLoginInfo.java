@@ -23,8 +23,10 @@ import lombok.NoArgsConstructor;
 public class UserLoginInfo implements Serializable{
 	private static final long serialVersionUID = 1L;
 
-	/** メールアドレス（認証時使用）*/
 	@Id
+	private Long userId;
+
+	/** メールアドレス（認証時使用）*/
 	@Column(nullable=false,columnDefinition="VARCHAR(255)")
 	private String email;
 
