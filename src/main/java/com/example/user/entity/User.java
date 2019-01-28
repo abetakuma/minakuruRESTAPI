@@ -1,14 +1,18 @@
 package com.example.user.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+
+import com.example.idea.entity.Idea;
 
 import lombok.Data;
 
@@ -41,4 +45,7 @@ public class User {
     public void onPreUpdate() {
         setUpdatedAt(new Date());
     }
+
+    @ManyToMany(mappedBy="userList")
+    private List<Idea> ideaList;
 }
