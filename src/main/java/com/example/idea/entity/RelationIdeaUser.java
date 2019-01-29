@@ -13,7 +13,7 @@ import lombok.Data;
 @Entity
 @Table(name = "ideas_users")
 @Data
-public class relationIdeasUsers {
+public class RelationIdeasUsers {
     @Id
     private Long ideaId;
     private Long userId;
